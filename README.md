@@ -2,7 +2,7 @@
 
 # 📗 Table of Contents
 
-- [� Table of Contents](#-table-of-contents)
+- [📗 Table of Contents](#-table-of-contents)
 - [📖 Vet Clinic Project ](#-vet-clinic-project-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
@@ -60,7 +60,7 @@ Example commands:
 ```sh
   cd <desired-folder>
   git clone https://github.com/mertkantaroglu/Vet-Clinic.git
-  cd react-redux-group-project
+  cd Vet-Clinic
 ```
 
 ## 👥 Authors <a name="authors"></a>
