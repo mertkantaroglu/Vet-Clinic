@@ -7,23 +7,34 @@ SELECT * FROM animals WHERE neutered = true;
 SELECT * FROM animals WHERE name != 'Gabumon';
 SELECT * FROM animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
 
-BEGIN TRANSACTION;
-UPDATE animals SET species = 'unspecified';
+BEGIN; -- start transaction
+UPDATE animals SET species = 'unspecified'; -- make change
+
+SELECT species from animals; -- verify that change was made
 ROLLBACK;
 
+SELECT species from animals; -- verify that change was undone
+
+BEGIN; -- start transaction
 UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
-UPDATE animals SET species = 'pokemon' WHERE species IS NULL;
+SELECT species from animals; -- verify that change was made
 COMMIT;
-ROLLBACK;
 
-BEGIN TRANSACTION;
+BEGIN; -- start transaction
+UPDATE animals SET species = 'pokemon' WHERE species IS NULL;
+SELECT species from animals; -- verify that change was made
+COMMIT;
+
+BEGIN; -- start transaction
 DELETE FROM animals;
+SELECT * from animals; -- verify that change was made
 ROLLBACK;
+SELECT * from animals; -- verify that change was undone
 
+BEGIN;
 DELETE FROM animals WHERE date_of_birth > '2022-01-01';
-
-BEGIN TRANSACTION;
 SAVEPOINT my_sp1;
+
 UPDATE animals SET weight_kg = weight_kg * -1;
 ROLLBACK TO SAVEPOINT my_sp1;
 
