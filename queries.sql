@@ -132,9 +132,10 @@ ORDER BY vets.name;
 -- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
 SELECT animals.name, visits.visit_date
 FROM visits
-JOIN vets ON visits.vet_id = vets.id
-JOIN animals ON visits.animal_id = animals.id
-WHERE vets.name = 'Stephanie Mendez';
+LEFT JOIN animals ON animals.id = visits.animal_id
+LEFT JOIN vets ON vets.id = visits.vet_id
+WHERE vets.name = 'Stephanie Mendez'
+AND visit_date > '2020-04-01' AND visit_date < '2020-08-30';
 
 -- What animal has the most visits to vets?
 SELECT animals.name, COUNT(*) AS num_visits
