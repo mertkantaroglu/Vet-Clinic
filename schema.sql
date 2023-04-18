@@ -12,7 +12,7 @@ CREATE TABLE animals (
 CREATE TABLE owners (
   id SERIAL PRIMARY KEY,
   full_name VARCHAR(255),
-  age INTEGER
+  age INTEGER,
 );
 
 CREATE TABLE species (
@@ -39,3 +39,20 @@ CREATE TABLE visits (
   vet_id INTEGER REFERENCES vets(id),
   visit_date DATE
 );
+
+-- Add Email column to Owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- Decrease the execution time for animal_id query
+CREATE INDEX animal_index ON visits(animal_id);
+
+  -- Check the execution time
+explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
+
+-- Decrease the execution time for vet_id query
+CREATE INDEX vet_id_index ON visits(vet_id)
+INCLUDE (id, animal_id, visit_date)
+WHERE vet_id=2;
+
+  -- Check the execution time
+explain analyze SELECT * FROM visits where vet_id = 2;
