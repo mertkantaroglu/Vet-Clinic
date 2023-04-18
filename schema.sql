@@ -39,3 +39,4 @@ CREATE TABLE visits (
   vet_id INTEGER REFERENCES vets(id),
   visit_date DATE
 );
+CREATE INDEX email_index ON owners(email);
