@@ -56,4 +56,6 @@ WHERE vet_id=2;
 
   -- Check the execution time
 explain analyze SELECT * FROM visits where vet_id = 2;
+
+-- Decrease the execution time for email_index query
 CREATE INDEX email_index ON owners(email);
